@@ -1,4 +1,8 @@
 class NumArray:
+	"""
+	Runtime: 68 ms, faster than 97.72% of Python3 online submissions.
+	Memory Usage: 17.7 MB, less than 47.05% of Python3 online submissions.
+	"""
 
 	def __init__(self, nums):
 		self.cum_sum = nums[:]
