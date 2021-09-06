@@ -6,11 +6,13 @@
 #         self.right = right
 
 class Solution:
-    """Top 60% by speed", top 70% by memory."""
+    """
+    Runtime: 28 ms, faster than 99.59% of Python3 online submissions.
+    Memory Usage: 16.1 MB, less than 61.37% of Python3 online submissions.
+    """
     def maxDepth(self, root: TreeNode) -> int:
         if root:
-            n = self.explore(root, 1)
-            return n
+            return self.explore(root, 1)
         else:
             return 0
     
@@ -18,9 +20,6 @@ class Solution:
         if not root or (not root.left and not root.right):
             return n
 
-        left_n, right_n = 0, 0
         left_n = self.explore(root.left, n + 1)
         right_n = self.explore(root.right, n + 1)
-        
         return max(left_n, right_n)
-        
