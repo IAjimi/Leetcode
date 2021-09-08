@@ -37,21 +37,3 @@ class Solution:
 			l1 = l1.next
 
 		return dummy
-
-	def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-		"""
-		First attempt. Slow and memory-intensive because creating a new Linked List.
-
-		Runtime: 76 ms, faster than 34.52% of Python3 online submissions.
-		Memory Usage: 14.5 MB, less than 12.88% of Python3 online submissions.
-		"""
-		l1_num = self.getNum(l1)
-		l2_num = self.getNum(l2)
-		target = str(l1_num + l2_num)[::-1]
-
-		target = [ListNode(int(n), None) for n in target]
-
-		for ix in range(len(target) - 1):
-			target[ix].next = target[ix + 1]
-
-		return target[0]
