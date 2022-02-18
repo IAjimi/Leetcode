@@ -46,6 +46,8 @@ class Solution:
         self, l1: Optional[ListNode], l2: Optional[ListNode]
     ) -> Optional[ListNode]:
         """
+        Note: there is a more concise way to handle the if/else loop but it adds 20ms to the runtime.
+
         Runtime: 76 ms, faster than 63.13% of Python3 online submissions for Add Two Numbers.
         Memory Usage: 13.9 MB, less than 98.33% of Python3 online submissions for Add Two Numbers.
         """

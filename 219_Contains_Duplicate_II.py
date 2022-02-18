@@ -22,12 +22,13 @@ class Solution:
 
         return False
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     assert not Solution().containsNearbyDuplicate(nums=[1], k=0)
     assert not Solution().containsNearbyDuplicate(nums=[1, 2], k=0)
     assert Solution().containsNearbyDuplicate(nums=[1, 2, 1], k=2)
     assert not Solution().containsNearbyDuplicate(nums=[1, 2, 1], k=1)
 
-    assert Solution().containsNearbyDuplicate(nums=[1,0,1,1], k=3)
-    assert Solution().containsNearbyDuplicate(nums=[1,0,1,1], k=1)
-    assert not Solution().containsNearbyDuplicate(nums=[1,2,3,1,2,3], k=2)
+    assert Solution().containsNearbyDuplicate(nums=[1, 0, 1, 1], k=3)
+    assert Solution().containsNearbyDuplicate(nums=[1, 0, 1, 1], k=1)
+    assert not Solution().containsNearbyDuplicate(nums=[1, 2, 3, 1, 2, 3], k=2)

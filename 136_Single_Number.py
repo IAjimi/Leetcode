@@ -16,5 +16,3 @@ class Solution:
             i += 2
 
         return nums[i]
-
-
