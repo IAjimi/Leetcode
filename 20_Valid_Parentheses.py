@@ -1,29 +1,32 @@
 class Solution:
-	def isValid(self, string: str) -> bool:
-		"""
-		Runtime: 28 ms, faster than 86.17% of Python3 online submissions.
-		Memory Usage: 14.3 MB, less than 63.45% of Python3 online submissions.
-		"""
-		stack = []
-		matches = {
-			')': '(',
-			'}': '{',
-			']': '['
-		}
+    def isValid(self, s: str) -> bool:
+        """
+        Runtime: 52 ms, faster than 27.72% of Python3 online submissions for Valid Parentheses.
+        Memory Usage: 13.9 MB, less than 94.44% of Python3 online submissions for Valid Parentheses."""
+        matching = {"{": "}", "(": ")", "[": "]"}
+        stack = []
 
-		for char in string:
-			if char in ['(', '[', '{']:
-				stack.append(char)
-			elif char in [')', ']', '}']:
-				if stack:
-					matching_char = stack.pop()
+        for char in s:
+            if char in matching:
+                stack.append(char)
+            else:  # only ()[]{} allowed in str
+                if not stack:
+                    return False
 
-					if matching_char != matches[char]:
-						return False
-				else:  # unmatched closed bracket
-					return False
+                open_char = stack.pop()
+                if char != matching[open_char]:
+                    return False
 
-		if stack:  # if stack isn't empty, some characters weren't match
-			return False
-		else:
-			return True
+        if stack:
+            return False
+        return True
+
+
+if __name__ == "__main__":
+    assert not Solution().isValid("(")
+    assert not Solution().isValid("}")
+    assert Solution().isValid("()")
+    assert not Solution().isValid("(]")
+    assert Solution().isValid("([{}])")
+    assert not Solution().isValid("([{})")
+    assert not Solution().isValid("([{})")
