@@ -1,22 +1,23 @@
+from collections import defaultdict
+from typing import List
+
+
 class Solution:
-	def groupAnagrams(self, strs):
-		"""
-		Runtime: 145 ms, faster than 13.32% of Python3 online submissions.
-		Memory Usage: 17.3 MB, less than 77.13% of Python3 online submissions.
-		"""
-		d = {}
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        """
+        Runtime: 92 ms, faster than 95.92% of Python3 online submissions for Group Anagrams.
+        Memory Usage: 17.9 MB, less than 54.22% of Python3 online submissions for Group Anagrams.
+        """
+        sorted_strs = ["".join(sorted(s)) for s in strs]
+        zipped = zip(strs, sorted_strs)
 
-		for word in strs:
-			sorted_word = [w for w in word]
-			sorted_word.sort()
-			sorted_word = ''.join(sorted_word)
+        hashmap = defaultdict(list)
 
-			if sorted_word in d:
-				d[sorted_word].append(word)
-			else:
-				d[sorted_word] = [word]
+        for string, sorted_string in zipped:
+            hashmap[sorted_string].append(string)
 
-		return list(d.values())
+        return hashmap.values()
 
-if __name__ == '__main__':
-	Solution().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+
+if __name__ == "__main__":
+    assert Solution().groupAnagrams(strs=["eat", "tea", "tan", "ate", "nat", "bat"])
