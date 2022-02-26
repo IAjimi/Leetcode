@@ -4,10 +4,8 @@ class Solution:
         Runtime: 24 ms, faster than 95.04% of Python3 online submissions.
         Memory Usage: 14.3 MB, less than 11.50% of Python3 online submissions.
         """
-        if n == 1:
-            return 1
-        elif n == 2:
-            return 2
+        if n <= 2:
+            return n
         else:
             twice_before = 1
             once_before = 2
