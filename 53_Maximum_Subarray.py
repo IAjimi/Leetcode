@@ -28,17 +28,12 @@ class Solution:
 
     def otherDPMaxSubArray(self, nums: List[int]) -> int:
         """
-        Note: could store only previous result instead of dp array.
-
-        Runtime: 1101 ms, faster than 37.13% of Python3 online submissions for Maximum Subarray.
-        Memory Usage: 28 MB, less than 76.61% of Python3 online submissions for Maximum Subarray.
+        Runtime: 845 ms, faster than 67.89% of Python3 online submissions for Maximum Subarray.
+        Memory Usage: 28 MB, less than 57.09% of Python3 online submissions for Maximum Subarray.
         """
-        dp = [None for n in nums]
+        dp = [-(10**5) for _ in nums]
 
         for i, n in enumerate(nums):
-            if i == 0:
-                dp[i] = n
-            else:
-                dp[i] = max(dp[i - 1] + n, n)
+            dp[i] = max(dp[i - 1] + n, n)
 
         return max(dp)
