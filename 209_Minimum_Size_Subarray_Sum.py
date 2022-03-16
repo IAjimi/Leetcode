@@ -34,6 +34,45 @@ class Solution:
 
         return min_size
 
+    def size(self, l, r):
+        return 1 + r - l
+
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        """
+        Smarter sliding window.
+
+        Runtime: 104 ms, faster than 55.28% of Python3 online submissions for Minimum Size Subarray Sum.
+        Memory Usage: 16.9 MB, less than 11.59% of Python3 online submissions for Minimum Size Subarray Sum.
+        """
+        if sum(nums) < target:
+            return 0
+
+        l = 0
+        r = 0
+        cur_sum = nums[0]
+        min_size = len(nums)
+
+        while l <= r <= len(nums) - 1:
+            # shrink
+            if cur_sum >= target:
+                min_size = min(min_size, self.size(l, r))
+                cur_sum -= nums[l]
+                l += 1
+            # grow
+            elif cur_sum < target and self.size(l, r) + 1 < min_size:
+                r += 1
+                if r < len(nums):
+                    cur_sum += nums[r]
+            # slide
+            elif cur_sum < target:
+                cur_sum -= nums[l]
+                l += 1
+                r += 1
+                if r < len(nums):
+                    cur_sum += nums[r]
+
+        return min_size
+
 
 if __name__ == "__main__":
     assert Solution().minSubArrayLen(target=7, nums=[2, 3, 1, 2, 4, 3])
