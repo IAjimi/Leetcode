@@ -21,11 +21,12 @@ class Solution:
             if not node or node.val in new_nodes:
                 continue
 
-            # get or create node copy
+            # create node copy
             node_copy = Node(val=node.val)
             new_nodes[node.val] = node_copy
 
             for nn in node.neighbors:
+                # undirected graph so we only need to edit links 1x
                 if nn.val in new_nodes:
                     new_nodes[nn.val].neighbors.append(node_copy)
                     node_copy.neighbors.append(new_nodes[nn.val])

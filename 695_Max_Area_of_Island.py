@@ -1,49 +1,44 @@
-from typing import List
+from typing import List, Tuple
 
 
 class Solution:
-	"""
-	DFS. Get position of all 1s, then visit them 1 by 1.
-	Runtime: 184 ms, faster than 19.24% of Python3 online submissions.
-	Memory Usage: 15.2 MB, less than 73.13% of Python3 online submissions.
-	"""
-	def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-		max_area = 0
-		nodes = {(x, y) for x in range(len(grid)) for y in range(len(grid[0])) if grid[x][y] == 1}
-		queue = list(nodes)
+    def bfs(self, start: Tuple[int, int], grid: List[List[int]]):
+        size = 0
+        q = [start]
 
-		while queue:
-			n = queue.pop()
-			area, recently_visited = self.explore(n, nodes)
-			queue = [q for q in queue if q not in recently_visited]
-			max_area = max(max_area, area)
+        while q:
+            i, j = q.pop()
 
-		return max_area
+            if not (0 <= i <= len(grid) - 1) or not (0 <= j <= len(grid[0]) - 1):
+                continue
+            elif grid[i][j] != 1:
+                continue
 
-	def neighbors(self, node: tuple) -> list[tuple]:
-		"""
-		Returns list of neighboring nodes.
-		"""
-		x, y = node
-		return [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+            grid[i][j] = 0  # mark as visited
+            size += 1
+            neighbors = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
+            for n in neighbors:
+                q.append(n)
 
-	def explore(self, start: tuple, nodes: set):
-		"""
-		DFS implementation.
-		"""
-		area = 0
-		queue = [start]
-		recently_visited = set()
+        return grid, size
 
-		while queue:
-			node = queue.pop()
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        """
+        Runtime: 156 ms, faster than 77.60% of Python3 online submissions for Max Area of Island.
+        Memory Usage: 14.9 MB, less than 73.57% of Python3 online submissions for Max Area of Island.
+        """
+        max_size = 0
+        ones = [
+            (i, j)
+            for i in range(len(grid))
+            for j in range(len(grid[0]))
+            if grid[i][j] == 1
+        ]
 
-			if node not in recently_visited:
-				recently_visited.add(node)
-				area += 1
+        while ones:
+            start = ones.pop()
+            if grid[start[0]][start[1]] == 1:
+                grid, size = self.bfs(start, grid)
+                max_size = max(max_size, size)
 
-				for n in self.neighbors(node):
-					if n in nodes:
-						queue.append(n)
-
-		return area, recently_visited
+        return max_size

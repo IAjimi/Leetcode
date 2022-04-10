@@ -1,12 +1,14 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 
 class Solution:
     """Top 70% by speed, top 30% by memory."""
+
     def minDepth(self, root):
         if root:
             n = self.explore(root, 1)
