@@ -4,8 +4,8 @@ from typing import List
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         """
-        Runtime: 60 ms, faster than 89.50% of Python3 online submissions.
-        Memory Usage: 15.1 MB, less than 45.75% of Python3 online submissions.
+        Runtime: 63 ms, faster than 95.14% of Python3 online submissions for Kth Largest Element in an Array.
+        Memory Usage: 14.7 MB, less than 76.29% of Python3 online submissions for Kth Largest Element in an Array.
         """
-        nums.sort(reverse=True)
-        return nums[k - 1]
+        nums.sort()
+        return nums[len(nums) - k]
